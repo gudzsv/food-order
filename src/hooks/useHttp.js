@@ -17,15 +17,19 @@ async function sendHttpRequest(url, config) {
 export default function useHttp(url, config, initialData) {
 	const [data, setData] = useState(initialData);
 	const [error, setError] = useState();
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
+
+	function clearData() {
+		setData(initialData);
+	}
 
 	const sendRequest = useCallback(
-		async function sendRequest() {
+		async function sendRequest(data) {
 			try {
 				setError('');
 				setIsLoading(true);
 
-				const resData = await sendHttpRequest(url, config);
+				const resData = await sendHttpRequest(url, { ...config, body: data });
 				setData(resData);
 			} catch (error) {
 				setError(error.message || 'Something went wrong!');
@@ -46,5 +50,6 @@ export default function useHttp(url, config, initialData) {
 		isLoading,
 		error,
 		sendRequest,
+		clearData,
 	};
 }
