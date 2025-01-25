@@ -8,7 +8,6 @@
 		"build": "vite build",
 		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
-		"install": "cd backend && npm install && cd .. && npm install",
 		"start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
 		"start:frontend": "vite",
 		"start:backend": "cd backend && npm start"
